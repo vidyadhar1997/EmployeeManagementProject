@@ -1,9 +1,10 @@
-﻿.mainCon {
+﻿.mainContainer {
     display: flex;
     margin-top: 220px;
     justify-content: center;
     align-items: center;
 }
+
 .container {
     display: flex;
     flex-direction: column;
@@ -16,36 +17,39 @@
     background-color: lightgreen;
     border-radius: 20px;
 }
+
 .employeeManagement {
     color: purple;
     font-size: 30px;
 }
-.login {
+
+.registration {
     color: forestgreen;
     font-size: 30px;
 }
+
 .inputs {
-    width: 84%;
+    width: 90%;
     display: flex;
     justify-content: space-between;
     margin-top: 18px;
-    color: red;
+    color:red;
 }
-.link {
-    width: 84%;
-    margin-top: 18px;
-}
+
 .buttons {
-    width: 84%;
+    width: 90%;
     margin-top: 30px;
     display: flex;
     justify-content: space-between;
+    color:aqua;
 }
-.forgotPassword {
+
+.loginInstead {
     position: relative;
     top: 10px;
 }
-.loginButton {
+
+.registrationButton {
     background-color: blue;
     border: none;
     color: #fefdfd;
@@ -59,5 +63,5 @@
 }
 .placeHolders {
     color: black;
-    border-radius: 3px;
+    border-radius:3px;
 }
