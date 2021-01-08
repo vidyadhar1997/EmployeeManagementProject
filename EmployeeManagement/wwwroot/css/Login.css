@@ -1,2 +1,57 @@
-﻿body {
+﻿.mainCon {
+    display: flex;
+    margin-top: 220px;
+    justify-content: center;
+    align-items: center;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-style: groove;
+    width: 330px;
+    padding: 20px;
+    border-radius: 5px;
+    background-color:lightgreen;
+}
+.employeeManagement {
+    color: purple;
+    font-size: 30px;
+}
+.login {
+    color: forestgreen;
+    font-size: 30px;
+}
+.inputs {
+    width: 84%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 18px;
+}
+.link {
+    width: 84%;
+    margin-top: 18px;
+}
+.buttons {
+    width: 84%;
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+.forgotPassword {
+    position: relative;
+    top: 10px;
+}
+.loginButton {
+    background-color: blue;
+    border: none;
+    color: #fefdfd;
+    padding: 5px 3px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    padding: 10px 23px;
+    border-radius: 5px;
 }
