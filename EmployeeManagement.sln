@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeManagement", "EmployeeManagement\EmployeeManagement.csproj", "{EACCD7F8-67B3-4B5B-9084-4939FB689D21}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeManagement", "EmployeeManagement\EmployeeManagement.csproj", "{EACCD7F8-67B3-4B5B-9084-4939FB689D21}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeRepoisitory", "EmployeeRepoisitory\EmployeeRepoisitory.csproj", "{9E6FC9EC-7F8C-4EFD-A5B8-E57058D6013C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{EACCD7F8-67B3-4B5B-9084-4939FB689D21}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EACCD7F8-67B3-4B5B-9084-4939FB689D21}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EACCD7F8-67B3-4B5B-9084-4939FB689D21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E6FC9EC-7F8C-4EFD-A5B8-E57058D6013C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E6FC9EC-7F8C-4EFD-A5B8-E57058D6013C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E6FC9EC-7F8C-4EFD-A5B8-E57058D6013C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E6FC9EC-7F8C-4EFD-A5B8-E57058D6013C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

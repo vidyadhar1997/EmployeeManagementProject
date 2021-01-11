@@ -4,31 +4,32 @@
     <meta charset="utf-8" />
     <title>Employee management</title>
     <link rel="stylesheet" href="/css/Login.css">
+    <script type="text/javascript" src="/js/Login.js"></script>
 </head>
 <body>
     <div>
         <div class="employeeManagement"><label for="EmployeeManagement">Employee Management</label></div>
         <div class="mainCon">
-            <div class="container">
+            <form class="container" name="myForms" action="#" method="post" onsubmit="return (validateforms());">
                 <div class="login"><label for="Login">Login</label></div>
                 <div class="inputs">
                     <label for="Email">Email:</label>
-                    <input type="text" class="placeHolders" placeholder="Email" name="Email" />
+                    <input type="text" class="placeHolders" placeholder="Email" name="email" />
                 </div>
                 <div class="inputs">
                     <label for="Password">Password:</label>
-                    <input type="password" class="placeHolders" placeholder="Password" name="Password" />
+                    <input type="password" class="placeHolders" placeholder="Password" name="password" />
                 </div>
                 <div class="link">
                     <a style="text-decoration:none" href="ForgotPassword.html">Forgot Password</a>
-
                 </div>
                 <div class="buttons">
                     <a style="text-decoration:none" href="Registration.html" id="CreateAccount">Create Account </a>
-                    <a href="WelcomePage.html" input type="submit" class="loginButton" value="Login">Login</a>
+                  <!-- <a href="WelcomePage.html" button type="submit" class="loginButton" value="Login">Login</a>-->
+                   <button type="submit"  class="loginButton">Login</button>
                 </div>
+            </form>
             </div>
         </div>
-    </div>
 </body>
 </html>
