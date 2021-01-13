@@ -1,28 +1,4 @@
-﻿/*function validateform() {
-    var email = document.myForm.email.value;
-    var password = document.myForm.password.value;
-    if (email == null || email == "") {
-        alert("email can't be blank");
-        return false;
-    } else if (password.length < 6) {
-        alert("Password must be at least 6 characters long.");
-        return false;
-    }
-    return true;
-}*/
-/*function validateform() {
-    var emailCheckRegex = /^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z0-9]{2,6}$/;
-    var passwordCheckRegex = /^(?=.*[A-Z])(?=.*[@#$%&*!_.-=])(?=.*[0-9])[a-zA-Z0-9].{8,}+$/;
-    if (emailCheckRegex.test(document.myForm.email.value) == false) {
-        alert("email must be in proper manner");
-        return false;
-    } else if (passwordCheckRegex.test(document.myForm.password.value) == false) {
-        alert("password must be proper");
-        return false;
-    }
-    return true;
-}*/
-function validateform() {
+﻿/*function validateForm() {
     var emailRegex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i
     var passwordRegex = /^[A-Za-z0-9!@#$%^&*()_]{6,20}$/;
     var firstNameRegex = /^[A-Z]{1}[a-z]{2,}$/;
@@ -33,8 +9,6 @@ function validateform() {
     var Zip = document.myForm.Zip.value;
     var ConfirmPassword = document.myForm.ConfirmPassword.value;
     var Password = document.myForm.password.value;
-
-
     if (!firstNameRegex.test(document.myForm.FirstName.value)) {
         alert("Error:First name start with Capital letter");
         document.myForm.FirstName.focus();
@@ -74,17 +48,33 @@ function validateform() {
         return false;
     }
     else {
-        alert("Registration is successfull");
-        return true;
+        alert("Registration successful");
     }
-    }
+    var employee = {};
+    employee.FirstName = $("#FirstName").val();
+    employee.LastName = $("#LastName").val();
+    employee.Email = $("#Email").val();
+    employee.Password = $("#Password").val();
+    employee.PhoneNumber = $("#PhoneNumber").val();
+    employee.Address = $("#Address").val();
+    employee.City = $("#City").val();
+    employee.State = $("#State").val();
+    employee.Zip = $("#Zip").val();
+    $.ajax({
+        type: "POST",
+        url: '@Url.Action("createEmployee")',
+        date: '{std:' + JSON.stringify(employee) + '}',
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        success: function () {
+            alert("Data has been added successfully.");
+            return true;
 
-
-   /* var password = document.myForm.password.value;
-    if (email == null || email == "") {
-        alert("email can't be blank");
-        return false;
-    } else if (password.length < 6) {
-        alert("Password must be at least 6 characters long.");
-        return false;
-    }*/
+        },
+        error: function () {
+            alert("Error while inserting data");
+        }
+    });
+    return false;
+}*/
+  
