@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using ActionResult = Microsoft.AspNetCore.Mvc.ActionResult;
 using Controller = Microsoft.AspNetCore.Mvc.Controller;
 using ControllerBase = Microsoft.AspNetCore.Mvc.ControllerBase;
+using HttpGetAttribute = Microsoft.AspNetCore.Mvc.HttpGetAttribute;
 using HttpPostAttribute = Microsoft.AspNetCore.Mvc.HttpPostAttribute;
 using JsonResult = Microsoft.AspNetCore.Mvc.JsonResult;
 using RouteAttribute = Microsoft.AspNetCore.Mvc.RouteAttribute;
@@ -55,11 +56,22 @@ namespace EmployeeManagement.Controllers
                 return this.BadRequest();
             }
         }
-       /* public IActionResult GetEmployee(string id)
+
+        [HttpGet]
+        [Route("api/getEmployee")]
+        public IActionResult GetEmployee()
          {
-             List<Employee> employeeList = new List<Employee>();
-            employeeList = (List<Employee>)this.repoisitory.GetEmployee(id);
-            return (IActionResult)employeeList;
-         }*/
+            try 
+            {
+                IEnumerable<Employee> list = this.repoisitory.GetEmployee();
+                return this.Ok(list);
+            }
+            catch(Exception e) 
+            {
+                return this.BadRequest(e.Message);
+
+            }
+           
+        }
     }
 }

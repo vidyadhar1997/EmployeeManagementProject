@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using EmployeeModel.Models;
 using System.Linq;
+using System.Collections;
 
 namespace EmployeeRepoisitory
 {
@@ -28,10 +29,7 @@ namespace EmployeeRepoisitory
         public string Login(string Emial,string Password)
         {
             string message;
-             /*Employee employee = new Employee();*/
             var login=this.employeeContext.Employees.Where(x => x.Email == Emial && x.Password == Password).SingleOrDefault();
-            /* var login = this.employeeContext.Employees.Where(x => x.Email == employee.Email && x.Password ==employee.Password);*/
-            /*this.employeeContext.Employees.Find(login);*/
             if (login != null)
             {
                  message = "LOGIN SUCCESS";
@@ -45,11 +43,10 @@ namespace EmployeeRepoisitory
 
         }
 
-        public IEnumerable<Employee> GetEmployee(string id)
-        {
-            List<Employee> employees = new List<Employee>();
-            employees=employeeContext.Employees.ToList();
-            return employees;
+       public IEnumerable<Employee> GetEmployee()
+       {
+            IEnumerable<Employee> employeelist = this.employeeContext.Employees;
+            return employeelist.ToList();
         }
     }
 }

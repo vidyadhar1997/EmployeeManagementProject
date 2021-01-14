@@ -6,57 +6,56 @@
     <link rel="stylesheet" href="/css/WelcomePage.css">
 </head>
 <body>
-    <h1>Welcome To Employee management</h1>
-    <table id="employee">
-        <tr>
-            <th>First name</th>
-            <th>Last name</th>
-            <th>Email</th>
-            <th>Password</th>
-            <th>Phone Number</th>
-            <th>City</th>
-            <th>State</th>
-            <th>Zip</th>
-            <th>Edit</th>
-            <th>Delete</th>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td><input type="button" class="registrationButton" value="Edit" /></td>
-            <td><input type="button" id="delete" value="Delete" /></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td><input type="button" class="registrationButton" value="Edit" /></td>
-            <td><input type="button" id="delete" value="Delete" /></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td><input type="button" class="registrationButton" value="Edit" /></td>
-            <td><input type="button" id="delete" value="Delete" /></td>
-        </tr>
-        <tbody></tbody>
-    </table>
+        <h1>Welcome To Employee management</h1>
+        <table id="employee">
+            <tbody>
+                <tr>
+                    <th>Employee Id</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Email</th>
+                    <th>Password</th>
+                    <th>Phone Number</th>
+                    <th>Address</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Zip</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </tbody>
+        </table>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/getEmployee",
+                    success: function (data) {
+                        var employeeTable = $("#employee tbody");
+                        $(data).each(function (i, item) {
+                            employeeTable.append(
+
+                                "<tr><td> " + item.employeeId + "</td >"
+                                + "<td> " + item.firstName + "</td > "
+                                + "<td> " + item.lastName + "</td > "
+                                + "<td> " + item.email + "</td > "
+                                + "<td> " + item.password + "</td> "
+                                + "<td> " + item.phoneNumber + "</td > "
+                                + "<td> " + item.address + "</td > "
+                                + "<td> " + item.city + "</td> "
+                                + "<td> " + item.state + "</td > "
+                                + "<td> " + item.zip + "</td > "
+                                + "<td ><a href= WelcomePage.html><label id=edit>Edit</label></a></td>"
+                                + "<td ><a href= WelcomePage.html><label id=delete>Delete</label></a></td>"
+                                + "</tr> "
+                        )
+                           
+                        });
+                    }
+                });
+            });
+</script>
 </body>
 </html>
