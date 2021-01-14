@@ -9,6 +9,7 @@ namespace EmployeeRepoisitory
     public interface IRepoisitory
     {
         public string CreateEmployee(Employee employee);
+        public string Login(string Emial, string Password);
         public IEnumerable<Employee> GetEmployee(string id);
     }
 }

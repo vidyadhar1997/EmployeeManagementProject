@@ -42,8 +42,20 @@ namespace EmployeeManagement.Controllers
 
             }
         }
-       /* [HttpGet]
-         public IActionResult GetEmployee(string id)
+
+        [HttpPost]
+        [Route("api/loginEmployee")]
+        public IActionResult LoginEmployee([FromBody] Employee employee)
+        {
+            var result = this.repoisitory.Login(employee.Email,employee.Password);
+            if (result.Equals("LOGIN SUCCESS")) {
+                return this.Ok(result);
+            }
+            else {
+                return this.BadRequest();
+            }
+        }
+       /* public IActionResult GetEmployee(string id)
          {
              List<Employee> employeeList = new List<Employee>();
             employeeList = (List<Employee>)this.repoisitory.GetEmployee(id);

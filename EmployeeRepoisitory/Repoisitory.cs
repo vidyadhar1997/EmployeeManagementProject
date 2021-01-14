@@ -25,6 +25,25 @@ namespace EmployeeRepoisitory
             string message = "SUCCESS";
             return message;
         }
+        public string Login(string Emial,string Password)
+        {
+            string message;
+             /*Employee employee = new Employee();*/
+            var login=this.employeeContext.Employees.Where(x => x.Email == Emial && x.Password == Password).SingleOrDefault();
+            /* var login = this.employeeContext.Employees.Where(x => x.Email == employee.Email && x.Password ==employee.Password);*/
+            /*this.employeeContext.Employees.Find(login);*/
+            if (login != null)
+            {
+                 message = "LOGIN SUCCESS";
+            }
+            else
+            {
+                 message = "LOGIN UNSUCCESSFUL";
+
+            }
+            return message;
+
+        }
 
         public IEnumerable<Employee> GetEmployee(string id)
         {
