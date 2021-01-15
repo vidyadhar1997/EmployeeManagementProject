@@ -29,6 +29,7 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
+         
                 $.ajax({
                     type: "GET",
                     url: "/api/getEmployee",
@@ -48,14 +49,38 @@
                                 + "<td> " + item.state + "</td > "
                                 + "<td> " + item.zip + "</td > "
                                 + "<td ><a href= WelcomePage.html><label id=edit>Edit</label></a></td>"
-                                + "<td ><a href= WelcomePage.html><label id=delete>Delete</label></a></td>"
+                                + '<td ><a href= WelcomePage.html></a><input type=button name=Delete id=delete onclick=myfunction(' + item.employeeId + ') value=Delete/></td>'
                                 + "</tr> "
-                        )
-                           
+                            )
+
                         });
                     }
                 });
+
+        });
+
+        function myfunction(EmployeeId) {
+            $(function () {
+                $("#delete").click(function () {
+                    console.log(EmployeeId);
+                    $.ajax({
+                        type: "DELETE",
+                        url: "/api/deletedEmployee",
+                        data: { 'id': EmployeeId },
+                        success: function (data) {
+        
+                            alert("Data has been deleted successfully.")
+                            DataTables.ajax.reload();
+                            return true;
+
+                        },
+                        error: function () {
+                            alert("Error while deleting employeedata");
+                        }
+                    });
+                });
             });
+        }
 </script>
 </body>
 </html>

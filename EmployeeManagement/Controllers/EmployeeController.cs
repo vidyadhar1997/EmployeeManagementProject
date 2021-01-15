@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using ActionResult = Microsoft.AspNetCore.Mvc.ActionResult;
 using Controller = Microsoft.AspNetCore.Mvc.Controller;
 using ControllerBase = Microsoft.AspNetCore.Mvc.ControllerBase;
+using HttpDeleteAttribute = Microsoft.AspNetCore.Mvc.HttpDeleteAttribute;
 using HttpGetAttribute = Microsoft.AspNetCore.Mvc.HttpGetAttribute;
 using HttpPostAttribute = Microsoft.AspNetCore.Mvc.HttpPostAttribute;
 using JsonResult = Microsoft.AspNetCore.Mvc.JsonResult;
@@ -71,7 +72,19 @@ namespace EmployeeManagement.Controllers
                 return this.BadRequest(e.Message);
 
             }
-           
+        }
+
+        [HttpDelete]
+        [Route("api/deletedEmployee")]
+        public IActionResult DeleteEmployee(int id)
+        {
+            var result = this.repoisitory.RemoveEmployee(id);
+            if (result.Equals("Employee deleted")) {
+                return this.Ok(result);
+            }
+            else {
+                return this.BadRequest();
+            }
         }
     }
 }

@@ -48,5 +48,21 @@ namespace EmployeeRepoisitory
             IEnumerable<Employee> employeelist = this.employeeContext.Employees;
             return employeelist.ToList();
         }
+
+        public string RemoveEmployee(int Id)
+        {
+            try
+            { 
+                var login = this.employeeContext.Employees.Find(Id);
+                this.employeeContext.Employees.Remove(login);
+                this.employeeContext.SaveChangesAsync();
+                return "Employee deleted";
+            }
+            catch(Exception e) 
+            { 
+                throw e;
+
+            }
+        }
     }
 }
