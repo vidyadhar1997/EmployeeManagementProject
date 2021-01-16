@@ -33,10 +33,11 @@ namespace EmployeeManagement.Controllers
         [Route("api/addedEmployee")]
         public IActionResult AddEmployee([FromBody]Employee employee)
         {
+            string message = "SUCCESS";
             var result=this.repoisitory.CreateEmployee(employee);
-            if (result.Equals("SUCCESS")) 
+            if (result.Equals(message)) 
             {
-                return this.Ok(result);
+                return this.Ok(new { success = true, Message = "Add employee successfully", Data = result });
 
             }
             else 
@@ -80,9 +81,10 @@ namespace EmployeeManagement.Controllers
         [Route("api/deletedEmployee")]
         public IActionResult DeleteEmployee(int id)
         {
+            string message = "Employee deleted";
             var result = this.repoisitory.RemoveEmployee(id);
-            if (result.Equals("Employee deleted")) {
-                return this.Ok(result);
+            if (result.Equals(message)) {
+                return this.Ok((new { success = true, Message = "Employee deleted successfully", Data = result }));
             }
             else {
                 return this.BadRequest();
