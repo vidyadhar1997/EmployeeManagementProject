@@ -12,6 +12,7 @@ using ControllerBase = Microsoft.AspNetCore.Mvc.ControllerBase;
 using HttpDeleteAttribute = Microsoft.AspNetCore.Mvc.HttpDeleteAttribute;
 using HttpGetAttribute = Microsoft.AspNetCore.Mvc.HttpGetAttribute;
 using HttpPostAttribute = Microsoft.AspNetCore.Mvc.HttpPostAttribute;
+using HttpPutAttribute = Microsoft.AspNetCore.Mvc.HttpPutAttribute;
 using JsonResult = Microsoft.AspNetCore.Mvc.JsonResult;
 using RouteAttribute = Microsoft.AspNetCore.Mvc.RouteAttribute;
 
@@ -49,9 +50,10 @@ namespace EmployeeManagement.Controllers
         [Route("api/loginEmployee")]
         public IActionResult LoginEmployee([FromBody] Employee employee)
         {
+            string message = "LOGIN SUCCESS";
             var result = this.repoisitory.Login(employee.Email,employee.Password);
-            if (result.Equals("LOGIN SUCCESS")) {
-                return this.Ok(result);
+            if (result.Equals(message)) {
+                return this.Ok(new { success = true, Message = "Get All Users successfully", Data = result });
             }
             else {
                 return this.BadRequest();
@@ -81,6 +83,19 @@ namespace EmployeeManagement.Controllers
             var result = this.repoisitory.RemoveEmployee(id);
             if (result.Equals("Employee deleted")) {
                 return this.Ok(result);
+            }
+            else {
+                return this.BadRequest();
+            }
+        }
+
+        [HttpGet]
+        [Route("api/EmployeeDetails")]
+        public IActionResult GetEmployee(int id)
+        {
+            var result = this.repoisitory.GetEmployee(id);
+            if (result == true) {
+                return this.Ok((new { success = true, Message = "Employee details fetched successfully", Data = result }));
             }
             else {
                 return this.BadRequest();

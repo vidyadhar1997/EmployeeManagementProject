@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Employee managemen</title>
+    <link rel="stylesheet" href="/css/Update.css">
+</head>
+<body>
+    <div>
+        <div class="employeeManagement"><label for="EmployeeManagement">Employee Management</label></div>
+        <div class="mainContainer">
+            <form class="container">
+                <div class="updation"><label for="Update">Update Employee</label></div>
+                <div class="inputs">
+                    <label for="FirstName">Emplyee Id:</label>
+                    <input type="text" id="EmployeeId" class="placeHolders" placeholder="EmployeeId" name="EmployeeId" />
+                </div>
+                <div class="inputs">
+                    <label for="FirstName">First Name:</label>
+                    <input type="text" id="FirstName" class="placeHolders" placeholder="First Name" name="FirstName" />
+                </div>
+                <div class="inputs">
+                    <label for="Password">Last Name:</label>
+                    <input type="text" id="LastName" class="placeHolders" placeholder="Last Name" name="LastName" />
+                </div>
+                <div class="inputs">
+                    <label for="Email">Email:</label>
+                    <input type="email" id="Email" class="placeHolders" placeholder="Email" name="email" />
+                </div>
+                <div class="inputs">
+                    <label for="Phone Number">Phone Number:</label>
+                    <input type="text" id="PhoneNumber" class="placeHolders" placeholder="Phone Number" name="PhoneNumber" />
+                </div>
+                <div class="inputs">
+                    <label for="Address">Address:</label>
+                    <input type="text" id="Address" class="placeHolders" placeholder="Address" name="Address" />
+                </div>
+                <div class="inputs">
+                    <label for="City">City:</label>
+                    <input type="text" id="City" class="placeHolders" placeholder="City" name="City" />
+                </div>
+                <div class="inputs">
+                    <label for="State">State:</label>
+                    <input type="text" id="State" class="placeHolders" placeholder="State" name="State" />
+                </div>
+                <div class="inputs">
+                    <label for="Zip">Zip:</label>
+                    <input type="number" id="Zip" class="placeHolders" placeholder="Zip" name="Zip" />
+                </div>
+                <div class="buttons">
+                    <input type="button" name="Update" id="btnSave" onclick="UpdateEmployee();" value="Update" class="updationButton" />
+                    <input type="button" name="Cancel" id="btnSaves" onclick="https://localhost:5001/HTML/WelcomePage.html" value="Cancel"/>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript">
+     function UpdateEmployee() {
+            $(function () {
+                $("#btnSave").click(function () {
+                    var employee = {};
+                    employee.FirstName = $("#FirstName").val();
+                    employee.LastName = $("#LastName").val();
+                    employee.Email = $("#Email").val();
+                    employee.Password = $("#Password").val();
+                    employee.PhoneNumber = $("#PhoneNumber").val();
+                    employee.Address = $("#Address").val();
+                    employee.City = $("#City").val();
+                    employee.State = $("#State").val();
+                    employee.Zip = $("#Zip").val();
+                    console.log(JSON.stringify(employee));
+                    $.ajax({
+                        type: "PUT",
+                        url: "/api/updateEmployee",
+                        data: JSON.stringify(employee),
+                        dataType: "",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            alert("Data has been Updated successfully.");
+                            url: "https://localhost:5001/HTML/WelcomePage.html";
+                            return true;
+                        },
+                        error: function () {
+                            alert("Error while updating data");
+                        }
+                    });
+                    return false;
+                });
+            });
+        }
+    </script>
+</body>
+</html>

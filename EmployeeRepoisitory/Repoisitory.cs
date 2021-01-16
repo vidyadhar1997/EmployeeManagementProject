@@ -9,7 +9,7 @@ using System.Collections;
 
 namespace EmployeeRepoisitory
 {
-    public class Repoisitory:IRepoisitory
+    public class Repoisitory : IRepoisitory
     {
 
         EmployeeContext employeeContext;
@@ -26,25 +26,25 @@ namespace EmployeeRepoisitory
             string message = "SUCCESS";
             return message;
         }
-        public string Login(string Emial,string Password)
+        public string Login(string Emial, string Password)
         {
             string message;
-            var login=this.employeeContext.Employees.Where(x => x.Email == Emial && x.Password == Password).SingleOrDefault();
+            var login = this.employeeContext.Employees.Where(x => x.Email == Emial && x.Password == Password).SingleOrDefault();
             if (login != null)
             {
-                 message = "LOGIN SUCCESS";
+                message = "LOGIN SUCCESS";
             }
             else
             {
-                 message = "LOGIN UNSUCCESSFUL";
+                message = "LOGIN UNSUCCESSFUL";
 
             }
             return message;
 
         }
 
-       public IEnumerable<Employee> GetEmployee()
-       {
+        public IEnumerable<Employee> GetEmployee()
+        {
             IEnumerable<Employee> employeelist = this.employeeContext.Employees;
             return employeelist.ToList();
         }
@@ -52,16 +52,29 @@ namespace EmployeeRepoisitory
         public string RemoveEmployee(int Id)
         {
             try
-            { 
+            {
                 var login = this.employeeContext.Employees.Find(Id);
                 this.employeeContext.Employees.Remove(login);
                 this.employeeContext.SaveChangesAsync();
                 return "Employee deleted";
             }
-            catch(Exception e) 
-            { 
+            catch (NullReferenceException e)
+            {
                 throw e;
 
+            }
+        }
+
+        public bool GetEmployee(int id)
+        {
+           var getEmployee= this.employeeContext.Employees.Find(id);
+            if (getEmployee != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }

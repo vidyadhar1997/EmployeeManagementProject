@@ -6,76 +6,94 @@
     <link rel="stylesheet" href="/css/WelcomePage.css">
 </head>
 <body>
-        <h1>Welcome To Employee management</h1>
-        <table id="employee">
-            <tbody>
-                <tr>
-                    <th>Employee Id</th>
-                    <th>First name</th>
-                    <th>Last name</th>
-                    <th>Email</th>
-                    <th>Password</th>
-                    <th>Phone Number</th>
-                    <th>Address</th>
-                    <th>City</th>
-                    <th>State</th>
-                    <th>Zip</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                </tr>
-            </tbody>
-        </table>
+    <h1>Welcome To Employee management</h1>
+    <table id="employee">
+        <tbody>
+            <tr>
+                <th>Employee Id</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Phone Number</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Zip</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </tbody>
+    </table>
+
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script type="text/javascript">
 
         $(document).ready(function () {
-         
-                $.ajax({
-                    type: "GET",
-                    url: "/api/getEmployee",
-                    success: function (data) {
-                        var employeeTable = $("#employee tbody");
-                        $(data).each(function (i, item) {
-                            employeeTable.append(
+            $.ajax({
+                type: "GET",
+                url: "/api/getEmployee",
+                success: function (data) {
+                    var employeeTable = $("#employee tbody");
+                    $(data).each(function (i, item) {
+                        employeeTable.append(
 
-                                "<tr><td> " + item.employeeId + "</td >"
-                                + "<td> " + item.firstName + "</td > "
-                                + "<td> " + item.lastName + "</td > "
-                                + "<td> " + item.email + "</td > "
-                                + "<td> " + item.password + "</td> "
-                                + "<td> " + item.phoneNumber + "</td > "
-                                + "<td> " + item.address + "</td > "
-                                + "<td> " + item.city + "</td> "
-                                + "<td> " + item.state + "</td > "
-                                + "<td> " + item.zip + "</td > "
-                                + "<td ><a href= WelcomePage.html><label id=edit>Edit</label></a></td>"
-                                + '<td ><a href= WelcomePage.html></a><input type=button name=Delete id=delete onclick=myfunction(' + item.employeeId + ') value=Delete/></td>'
-                                + "</tr> "
-                            )
+                            "<tr><td> " + item.employeeId + "</td >"
+                            + "<td> " + item.firstName + "</td > "
+                            + "<td> " + item.lastName + "</td > "
+                            + "<td> " + item.email + "</td > "
+                            + "<td> " + item.password + "</td> "
+                            + "<td> " + item.phoneNumber + "</td > "
+                            + "<td> " + item.address + "</td > "
+                            + "<td> " + item.city + "</td> "
+                            + "<td> " + item.state + "</td > "
+                            + "<td> " + item.zip + "</td > "
+                            + '<td ><a href=Update.html><input type=button name=Edit id=edit onclick=UpdateEmployeeTable('+ item.employeeId +') value=Edit></a></td>'
+                            + '<td ><a href= WelcomePage.html></a><input type=button name=Delete id=delete onclick=myfunction(' + item.employeeId + ') value=Delete></td>'
+                            + "</tr> "
+                        )
 
-                        });
-                    }
-                });
-
+                    });
+                }
+            });
         });
 
         function myfunction(EmployeeId) {
             $(function () {
                 $("#delete").click(function () {
-                    console.log(EmployeeId);
+                    console.log("suraj");
                     $.ajax({
                         type: "DELETE",
                         url: "/api/deletedEmployee",
                         data: { 'id': EmployeeId },
                         success: function (data) {
-        
                             alert("Data has been deleted successfully.")
-                            DataTables.ajax.reload();
+                            window.location.reload();
                             return true;
-
                         },
                         error: function () {
                             alert("Error while deleting employeedata");
+                        }
+                    });
+                });
+            });
+        }
+
+                
+        function UpdateEmployeeTable() {
+            $(function () {
+                $("#edit").click(function () {
+                    console.log("dhiraj");
+                    $.ajax({
+                        type: "Get",
+                        url: "/api/EmployeeDetails",
+                        data: { 'id': EmployeeId },
+                        success: function (data) {
+                            alert("Employee deatails are fetched.")
+                            return true;
+                        },
+                        error: function () {
+                            alert("Error while fetching employee details");
                         }
                     });
                 });

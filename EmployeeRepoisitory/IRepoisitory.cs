@@ -12,5 +12,6 @@ namespace EmployeeRepoisitory
         public string Login(string Emial, string Password);
         public IEnumerable<Employee> GetEmployee();
         public string RemoveEmployee(int Id);
+        public bool GetEmployee(int id);
     }
 }
