@@ -4,6 +4,9 @@
     <meta charset="utf-8" />
     <title>Welcome To Employee management</title>
     <link rel="stylesheet" href="/css/WelcomePage.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
 <body>
     <h1>Welcome To Employee management</h1>
@@ -25,6 +28,84 @@
             </tr>
         </tbody>
     </table>
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Employee Details for Updation</h4>
+                </div>
+                <div class="modal-body" style="padding-left: 70px;">
+                    <form name="UpdateForm" style="">
+                        <div class="form-group row">
+                            <label for="EmployeeId" class="col-md-4 col-form-label text-md-left">Employee Id</label>
+                            <div class="col-md-6">
+                                <input type="text" id="EmployeeId" class="form-control" name="EmployeeId" placeholder="EmployeeId">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="first-name" class="col-md-4 col-form-label text-md-left">First Name</label>
+                            <div class="col-md-6">
+                                <input type="text" id="firstName" class="form-control" name="firstName" placeholder="First name">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="lastName" class="col-md-4 col-form-label text-md-left">Last Name</label>
+                            <div class="col-md-6">
+                                <input type="text" id="lastName" class="form-control" name="lastName" placeholder="Last name">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="Emial" class="col-md-4 col-form-label text-md-left">Email</label>
+                            <div class="col-md-6">
+                                <input type="text" id="Emial" class="form-control" name="Email" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="Password" class="col-md-4 col-form-label text-md-left">Password</label>
+                            <div class="col-md-6">
+                                <input type="text" id="Password" class="form-control" name="Password" placeholder="Password">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="PhoneNumber" class="col-md-4 col-form-label text-md-left">Phone Number</label>
+                            <div class="col-md-6">
+                                <input type="text" id="PhoneNumber" class="form-control" name="PhoneNumber" placeholder="Phone number">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="Address" class="col-md-4 col-form-label text-md-left">Address</label>
+                            <div class="col-md-6">
+                                <input type="text" id="Address" class="form-control" name="Address" placeholder="Address">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="City" class="col-md-4 col-form-label text-md-left">City</label>
+                            <div class="col-md-6">
+                                <input type="text" id="City" class="form-control" name="City" placeholder="City">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="State" class="col-md-4 col-form-label text-md-left">State</label>
+                            <div class="col-md-6">
+                                <input type="text" id="State" class="form-control" name="State" placeholder="State">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="Zip" class="col-md-4 col-form-label text-md-left">Zip</label>
+                            <div class="col-md-6">
+                                <input type="number" id="Zip" class="form-control" name="Zip" placeholder="Zip">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-primary" onclick="UpdateEmployee()" value="Update">
+                    <input type="button" class="btn btn-danger" data-dismiss="modal" value="Cancle">
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script type="text/javascript">
@@ -48,7 +129,7 @@
                             + "<td> " + item.city + "</td> "
                             + "<td> " + item.state + "</td > "
                             + "<td> " + item.zip + "</td > "
-                            + '<td ><a href=Update.html><input type=button name=Edit id=edit onclick=UpdateEmployeeTable('+ item.employeeId +') value=Edit></a></td>'
+                            + '<td ><button type=button id=edit class="btn btn-primary"  onclick= editTable(' + item.employeeId + ') value=Edit data-toggle="modal" data-target="#myModal">Edit</button> </td>'
                             + '<td ><a href= WelcomePage.html></a><input type=button name=Delete id=delete onclick=myfunction(' + item.employeeId + ') value=Delete></td>'
                             + "</tr> "
                         )
@@ -79,26 +160,63 @@
             });
         }
 
-                
-        function UpdateEmployeeTable() {
-            $(function () {
-                $("#edit").click(function () {
-                    console.log("dhiraj");
+
+        function editTable(EmployeeId) {
                     $.ajax({
                         type: "Get",
                         url: "/api/EmployeeDetails",
                         data: { 'id': EmployeeId },
+                         dataType: "Json",
                         success: function (data) {
-                            alert("Employee deatails are fetched.")
-                            return true;
+                            $(data).each(function (i, item) {
+                                $("#EmployeeId").val(item.employeeId );
+                                $("#firstName").val(item.firstName);
+                                $("#lastName").val(item.lastName);
+                                $("#Emial").val(item.email);
+                                $("#Password").val(item.password);
+                                $("#PhoneNumber").val(item.phoneNumber);
+                                $("#Address").val(item.address);
+                                $("#City").val(item.city);
+                                $("#State").val(item.state);
+                                $("#Zip").val(item.zip);
+                            });
                         },
                         error: function () {
                             alert("Error while fetching employee details");
                         }
                     });
-                });
+        }
+
+        function UpdateEmployee() {
+            console.log("dk");
+            var employee = {};
+            employee.EmployeeId = $("#EmployeeId").val();
+            employee.FirstName = $("#firstName").val();
+            employee.LastName = $("#lastName").val();
+            employee.Email = $("#Emial").val();
+            employee.Password = $("#Password").val();
+            employee.PhoneNumber = $("#PhoneNumber").val();
+            employee.Address = $("#Address").val();
+            employee.City = $("#City").val();
+            employee.State = $("#State").val();
+            employee.Zip = $("#Zip").val();
+            console.log(JSON.stringify(employee));
+            $.ajax({
+                type: "PUT",
+                url:"/api/update",
+                data: JSON.stringify(employee),
+                dataType: "",
+                contentType: "application/json; charset=utf-8",
+                processData: true,
+                success: function () {
+                    alert("Record Updated successfully.");
+                    window.location.reload();
+                },
+                error: function () {
+                    alert("Error while Updating...");
+                }
             });
         }
-</script>
+    </script>
 </body>
 </html>

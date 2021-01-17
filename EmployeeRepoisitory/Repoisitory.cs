@@ -65,16 +65,26 @@ namespace EmployeeRepoisitory
             }
         }
 
-        public bool GetEmployee(int id)
+        public IEnumerable<Employee> GetEmployee(int id)
         {
-           var getEmployee= this.employeeContext.Employees.Find(id);
-            if (getEmployee != null)
+            List<Employee> employees = new List<Employee>();
+            employees.Add(this.employeeContext.Employees.Find(id));
+            return employees;
+
+
+        }
+
+        public string UpdateEmployeeDetails(Employee employee)
+        {
+            try
             {
-                return true;
+                this.employeeContext.Employees.Update(employee);
+                this.employeeContext.SaveChangesAsync();
+                return "SUCCESS";
             }
-            else
+            catch (NullReferenceException e)
             {
-                return false;
+                throw e;
             }
         }
     }

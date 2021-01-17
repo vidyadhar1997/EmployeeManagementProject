@@ -16,6 +16,7 @@ using HttpPutAttribute = Microsoft.AspNetCore.Mvc.HttpPutAttribute;
 using JsonResult = Microsoft.AspNetCore.Mvc.JsonResult;
 using RouteAttribute = Microsoft.AspNetCore.Mvc.RouteAttribute;
 
+
 namespace EmployeeManagement.Controllers
 {
     /*[ApiController]*/
@@ -95,9 +96,24 @@ namespace EmployeeManagement.Controllers
         [Route("api/EmployeeDetails")]
         public IActionResult GetEmployee(int id)
         {
-            var result = this.repoisitory.GetEmployee(id);
-            if (result == true) {
-                return this.Ok((new { success = true, Message = "Employee details fetched successfully", Data = result }));
+            try
+            {
+                IEnumerable<Employee> list = this.repoisitory.GetEmployee(id);
+                return this.Ok(list);
+
+            }
+            catch(Exception e) {
+                return this.BadRequest(e.Message);
+            }
+        }
+
+        [HttpPut]
+        [Route("api/update")]
+        public IActionResult UpdateEmployee([FromBody]Employee employee)
+        {
+            var result = this.repoisitory.UpdateEmployeeDetails(employee);
+            if (result.Equals("SUCCESS")) {
+                return this.Ok(result);
             }
             else {
                 return this.BadRequest();
