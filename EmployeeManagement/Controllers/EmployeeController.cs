@@ -121,7 +121,7 @@ namespace EmployeeManagement.Controllers
         }
         
         [HttpPut]
-        [Route("api/reset")]
+        [Route("api/ResetPassword")]
         public IActionResult ResetPasswordEmployee(string oldpassword,string newPassword)
         {
             var result=this.repoisitory.ResetPassword(oldpassword, newPassword);

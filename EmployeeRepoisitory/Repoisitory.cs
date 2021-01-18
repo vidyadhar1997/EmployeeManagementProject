@@ -7,6 +7,7 @@ using EmployeeModel.Models;
 using System.Linq;
 using System.Collections;
 using Microsoft.EntityFrameworkCore;
+using System.Net.Mail;
 
 namespace EmployeeRepoisitory
 {
