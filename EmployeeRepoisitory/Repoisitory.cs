@@ -6,6 +6,7 @@ using System.Text;
 using EmployeeModel.Models;
 using System.Linq;
 using System.Collections;
+using Microsoft.EntityFrameworkCore;
 
 namespace EmployeeRepoisitory
 {
@@ -70,8 +71,6 @@ namespace EmployeeRepoisitory
             List<Employee> employees = new List<Employee>();
             employees.Add(this.employeeContext.Employees.Find(id));
             return employees;
-
-
         }
 
         public string UpdateEmployeeDetails(Employee employee)
@@ -85,6 +84,22 @@ namespace EmployeeRepoisitory
             catch (NullReferenceException e)
             {
                 throw e;
+            }
+        }
+
+        public string ResetPassword(string oldPassword,string newPassword)
+        {
+            var Entries=this.employeeContext.Employees.FirstOrDefault(x => x.Password == oldPassword);
+            if (Entries != null)
+            {
+                Entries.Password = newPassword;
+                this.employeeContext.Entry(Entries).State=EntityState.Modified;
+                this.employeeContext.SaveChanges();
+                return "SUCCESS";
+            }
+            else
+            {
+                return "NOT FOUND";
             }
         }
     }

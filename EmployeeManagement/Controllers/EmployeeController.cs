@@ -108,14 +108,29 @@ namespace EmployeeManagement.Controllers
         }
 
         [HttpPut]
-        [Route("api/update")]
-        public IActionResult UpdateEmployee([FromBody]Employee employee)
+        [Route("api/UpdateEmployee")]
+        public IActionResult UpdateEmployee([FromBody] Employee employee)
         {
             var result = this.repoisitory.UpdateEmployeeDetails(employee);
             if (result.Equals("SUCCESS")) {
                 return this.Ok(result);
             }
             else {
+                return this.BadRequest();
+            }
+        }
+        
+        [HttpPut]
+        [Route("api/reset")]
+        public IActionResult ResetPasswordEmployee(string oldpassword,string newPassword)
+        {
+            var result=this.repoisitory.ResetPassword(oldpassword, newPassword);
+            if (result.Equals("SUCCESS")) 
+            {
+                return this.Ok(result);
+            }
+            else 
+            {
                 return this.BadRequest();
             }
         }
