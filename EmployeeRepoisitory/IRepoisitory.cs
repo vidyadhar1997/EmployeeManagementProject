@@ -13,8 +13,8 @@ namespace EmployeeRepoisitory
         public IEnumerable<Employee> GetEmployee();
         public string RemoveEmployee(int Id);
         public IEnumerable<Employee> GetEmployee(int id);
-
         public string UpdateEmployeeDetails(Employee employee);
         public string ResetPassword(string oldPassword, string newPassword);
+        public string SendEmail(string emailAddress);
     }
 }

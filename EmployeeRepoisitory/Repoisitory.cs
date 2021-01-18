@@ -8,6 +8,7 @@ using System.Linq;
 using System.Collections;
 using Microsoft.EntityFrameworkCore;
 using System.Net.Mail;
+using System.Net;
 
 namespace EmployeeRepoisitory
 {
@@ -28,6 +29,7 @@ namespace EmployeeRepoisitory
             string message = "SUCCESS";
             return message;
         }
+
         public string Login(string Emial, string Password)
         {
             string message;
@@ -88,19 +90,49 @@ namespace EmployeeRepoisitory
             }
         }
 
-        public string ResetPassword(string oldPassword,string newPassword)
+        public string ResetPassword(string oldPassword, string newPassword)
         {
-            var Entries=this.employeeContext.Employees.FirstOrDefault(x => x.Password == oldPassword);
+            var Entries = this.employeeContext.Employees.FirstOrDefault(x => x.Password == oldPassword);
             if (Entries != null)
             {
                 Entries.Password = newPassword;
-                this.employeeContext.Entry(Entries).State=EntityState.Modified;
+                this.employeeContext.Entry(Entries).State = EntityState.Modified;
                 this.employeeContext.SaveChanges();
                 return "SUCCESS";
             }
             else
             {
                 return "NOT FOUND";
+            }
+        }
+        
+        public string SendEmail(string emailAddress)
+        {
+            string body;
+            string subject = "EmployeeManagement Credential";
+            var entry = this.employeeContext.Employees.FirstOrDefault(x => x.Email == emailAddress);
+            if (entry != null)
+            {
+                body = entry.Password;
+            }
+            else
+            {
+                return "Not Found";
+            }
+            using (MailMessage mailMessage = new MailMessage("vidyadharhudge1997@gmail.com", emailAddress))
+            {
+                mailMessage.Subject = subject;
+                mailMessage.Body = body;
+                mailMessage.IsBodyHtml = true;
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = "smtp.gmail.com";
+                smtp.EnableSsl = true;
+                NetworkCredential NetworkCred = new NetworkCredential("vidyadharhudge1997@gmail.com", "Dhiraj@123#");
+                smtp.UseDefaultCredentials = true;
+                smtp.Credentials = NetworkCred;
+                smtp.Port = 587;
+                smtp.Send(mailMessage);
+                return "SUCCESS";
             }
         }
     }

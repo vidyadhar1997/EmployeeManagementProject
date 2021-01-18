@@ -51,9 +51,9 @@
                 <div class="modal-body" style="padding-left: 70px;">
                     <form name="myForm" style="">
                         <div class="form-group row">
-                            <label for="EmployeeId" class="col-md-4 col-form-label text-md-left">Employee Id</label>
+                            <label for="employeeId" class="col-md-4 col-form-label text-md-left">Employee Id</label>
                             <div class="col-md-6">
-                                <input type="text" id="empId" class="form-control" name="EmployeeId" placeholder="EmployeeId">
+                                <input type="text" id="empId" class="form-control" name="employeeId" placeholder="employee Id">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -255,36 +255,33 @@
                     document.myForm.Zip.focus();
                     return false;
                 }
-                console.log("dk");
-                var employeess = {};
-                employeess.EmployeeId = $("#empId").val();
-                employeess.FirstName = $("#firstName").val();
-                employeess.LastName = $("#lastName").val();
-                employeess.Email = $("#Emial").val();
-                employeess.Password = $("#Password").val();
-                employeess.PhoneNumber = $("#PhoneNumber").val();
-                employeess.Address = $("#Address").val();
-                employeess.City = $("#City").val();
-                employeess.State = $("#State").val();
-                employeess.Zip = $("#Zip").val();
-                console.log(JSON.stringify(employeess));
-                $.ajax({
-                    type: "PUT",
-                    url: "/api/UpdateEmployee",
-                    data: JSON.stringify(employeess),
-                    dataType: "",
-                    contentType: "application/json; charset=utf-8",
-                    processData: true,
-                    success: function () {
-                        alert("Employee Data Updated successfully.");
-                        window.location.reload();
-                        return true;
-                    },
-                    error: function () {
-                        alert("Error while updating data");
-                    }
-                });
-                return false;
+                var employee = {};
+                employee.EmployeeId = $("#empId").val();
+                employee.FirstName = $("#firstName").val();
+                employee.LastName = $("#lastName").val();
+                employee.Email = $("#Emial").val();
+                employee.Password = $("#Password").val();
+                employee.PhoneNumber = $("#PhoneNumber").val();
+                employee.Address = $("#Address").val();
+                employee.City = $("#City").val();
+                employee.State = $("#State").val();
+                employee.Zip = $("#Zip").val();
+                console.log(JSON.stringify(employee));
+                 $.ajax({
+                type: "PUT",
+                url: "/api/update",
+                data: JSON.stringify(employee),
+                dataType: "",
+                contentType: "application/json; charset=utf-8",
+                processData: true,
+                success: function () {
+                    alert("Record Updated successfully.");
+                    window.location.reload();
+                },
+                error: function () {
+                    alert("Error while Updating...");
+                }
+                 });
             });
         });
     </script>

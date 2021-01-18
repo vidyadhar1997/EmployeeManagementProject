@@ -22,9 +22,8 @@ namespace EmployeeManagement.Controllers
     /*[ApiController]*/
     public class EmployeeController : ControllerBase
     {
-         private readonly IRepoisitory repoisitory;
+        private readonly IRepoisitory repoisitory;
         
-
         public EmployeeController(IRepoisitory repoisitory)
         {
             this.repoisitory = repoisitory;
@@ -108,7 +107,7 @@ namespace EmployeeManagement.Controllers
         }
 
         [HttpPut]
-        [Route("api/UpdateEmployee")]
+        [Route("api/update")]
         public IActionResult UpdateEmployee([FromBody] Employee employee)
         {
             var result = this.repoisitory.UpdateEmployeeDetails(employee);
@@ -131,6 +130,19 @@ namespace EmployeeManagement.Controllers
             }
             else 
             {
+                return this.BadRequest();
+            }
+        }
+
+        [HttpGet]
+        [Route("api/sendEmail/{emailAddress}/")]
+        public IActionResult ForgotPassword(string emailAddress)
+        {
+            var result = this.repoisitory.SendEmail(emailAddress);
+            if (result.Equals("SUCCESS")) {
+                return this.Ok(result);
+            }
+            else {
                 return this.BadRequest();
             }
         }
