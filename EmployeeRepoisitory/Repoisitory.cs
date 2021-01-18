@@ -109,7 +109,7 @@ namespace EmployeeRepoisitory
         public string SendEmail(string emailAddress)
         {
             string body;
-            string subject = "EmployeeManagement Credential";
+            string subject = "EmployeeManagements Credential";
             var entry = this.employeeContext.Employees.FirstOrDefault(x => x.Email == emailAddress);
             if (entry != null)
             {
