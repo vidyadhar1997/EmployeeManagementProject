@@ -107,9 +107,10 @@ namespace EmployeeManagement.Controllers
         }
 
         [HttpPut]
-        [Route("api/update")]
-        public IActionResult UpdateEmployee([FromBody] Employee employee)
+        [Route("api/update/{EmployeeId}")]
+        public IActionResult UpdateEmployee([FromBody] Employee employee,int EmployeeId)
         {
+            employee.EmployeeId = EmployeeId;
             var result = this.repoisitory.UpdateEmployeeDetails(employee);
             if (result.Equals("SUCCESS")) {
                 return this.Ok(result);
@@ -140,7 +141,7 @@ namespace EmployeeManagement.Controllers
         {
             var result = this.repoisitory.SendEmail(emailAddress);
             if (result.Equals("SUCCESS")) {
-                return this.Ok(result);
+                return this.Ok((new { success = true, Message = "Password Sent Successfully", Data = result }));
             }
             else {
                 return this.BadRequest();

@@ -162,7 +162,6 @@
                         success: function (data) {
                             alert("Data has been deleted successfully.")
                             window.location.reload();
-                            return true;
                         },
                         error: function () {
                             alert("Error while deleting employeedata");
@@ -255,8 +254,8 @@
                     document.myForm.Zip.focus();
                     return false;
                 }
+                let EmployeeId = $("#empId").val();
                 var employee = {};
-                employee.EmployeeId = $("#empId").val();
                 employee.FirstName = $("#firstName").val();
                 employee.LastName = $("#lastName").val();
                 employee.Email = $("#Emial").val();
@@ -268,10 +267,10 @@
                 employee.Zip = $("#Zip").val();
                 console.log(JSON.stringify(employee));
                  $.ajax({
-                type: "PUT",
-                url: "/api/update",
+                     type: "PUT",
+                     url: "/api/update/" + EmployeeId,
                 data: JSON.stringify(employee),
-                dataType: "",
+                dataType: "text",
                 contentType: "application/json; charset=utf-8",
                 processData: true,
                 success: function () {

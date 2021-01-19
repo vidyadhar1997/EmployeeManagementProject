@@ -80,7 +80,7 @@ namespace EmployeeRepoisitory
         {
             try
             {
-                this.employeeContext.Employees.Update(employee);
+                this.employeeContext.Entry(employee).State = EntityState.Modified;
                 this.employeeContext.SaveChangesAsync();
                 return "SUCCESS";
             }
